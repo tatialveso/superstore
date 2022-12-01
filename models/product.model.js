@@ -9,6 +9,9 @@ const productSchema = new Schema(
         price: {
             type: Number
         },
+        quantity: {
+            type: Number
+        },
         category: {
             type: String,
             enum: ["Vasos", "Flores", "Ferramentas", "Móveis"]
