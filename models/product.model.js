@@ -1,30 +1,27 @@
-import { model, Schema } from 'mongoose'
+import { model, Schema } from "mongoose";
 
 const productSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
         },
         price: {
-            type: Number
-        },
-        quantity: {
-            type: Number
+            type: Number,
         },
         category: {
             type: String,
-            enum: ["Vasos", "Flores", "Ferramentas", "Móveis"]
+            enum: ["Vasos", "Flores", "Ferramentas", "Móveis"],
         },
         orders: [
             {
                 type: Schema.Types.ObjectId,
                 ref: "Order"
             }
-        ]
+        ],
     }
-)
+);
 
-const ProductModel = model("Product", productSchema)
+const ProductModel = model("Product", productSchema);
 
-export default ProductModel
+export default ProductModel;
