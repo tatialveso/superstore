@@ -78,7 +78,17 @@ router.put("/edit/:id", async (req, res) => {
 router.delete("/delete/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        await OrderModel.findByIdAndDelete(id);
+        const deleteOrder = await OrderModel.findByIdAndDelete(id);
+        deleteOrder.products.forEach(async (element) => {
+            await ProductModel.findByIdAndUpdate(
+                element.product,
+                {
+                    $pull: {
+                        orders: deleteOrder._id,
+                    },
+                }
+            );
+        });
         return res.status(204).json({ msg: "order deleted!" });
     } catch (error) {
         console.log(error);
