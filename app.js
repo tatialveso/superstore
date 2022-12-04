@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import * as dotenv from 'dotenv'
 import dbConnection from './config/db.config.js'
 import productRouter from './routes/product.routes.js'
@@ -10,6 +11,7 @@ dotenv.config()
 dbConnection()
 
 const app = express()
+app.use(cors({ origin: process.env.REACT_URL}))
 app.use(express.json())
 
 app.use('/user', userRouter)
